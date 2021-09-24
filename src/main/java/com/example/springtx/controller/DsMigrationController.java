@@ -13,13 +13,13 @@ public class DsMigrationController {
         this.dsMigrationService = dsMigrationService;
     }
 
-    @GetMapping("/with_tx")
-    public void testWithTx() {
-        dsMigrationService.testTx();
+    @GetMapping("/with_error")
+    public void testWithError() {
+        dsMigrationService.testWithError();
     }
 
-    @GetMapping("/without_tx")
-    public void testWithoutTx() {
-        dsMigrationService.testWithoutTx();
+    @GetMapping("/without_error")
+    public void testWithoutError() {
+        dsMigrationService.testWithoutError();
     }
 }

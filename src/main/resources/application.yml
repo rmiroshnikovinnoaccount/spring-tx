@@ -4,3 +4,10 @@ spring:
     password: postgres21!
     url: jdbc:postgresql://localhost:5434/ds_migration_db
     driver-class-name: org.postgresql.Driver
+logging:
+  level:
+    org:
+      springframework:
+        transaction:
+          interceptor: TRACE
+debug: true

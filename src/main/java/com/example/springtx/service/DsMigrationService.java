@@ -16,7 +16,7 @@ public class DsMigrationService {
     }
 
     @Transactional(transactionManager = "dsMigrationTxManager", rollbackFor = Exception.class)
-    public void testTx() {
+    public void testWithError() {
         System.out.println("1 Transactional open?" + TransactionSynchronizationManager.isActualTransactionActive());
         for (int i = 0; i < 5; i++) {
             dsMigrationRepository.save(new Test(null, "qwe" + i));
@@ -25,9 +25,12 @@ public class DsMigrationService {
         throw new RuntimeException("Test exception");
     }
 
-    public void testWithoutTx() {
+    @Transactional(transactionManager = "dsMigrationTxManager", rollbackFor = Exception.class)
+    public void testWithoutError() {
         System.out.println("1 Transactional open?" + TransactionSynchronizationManager.isActualTransactionActive());
-        dsMigrationRepository.save(new Test(null, "qwe"));
+        for (int i = 0; i < 5; i++) {
+            dsMigrationRepository.save(new Test(null, "qwe" + i));
+        }
         System.out.println("2 Transactional open?" + TransactionSynchronizationManager.isActualTransactionActive());
     }
 }
